@@ -1,0 +1,118 @@
+The case of a simple single harmonic bucket has been simulated in Isyn. The particle coordinates have been generated within an elliptical distribution, and the simulation is done with the SIS-100 beam parameter around injection energy. The particles are tracked with one kick per turn for 50 000 turns, as a first step.
+
+In this paragraph, the namely file \detokenize{Isyn_StationaryBucket_noSc.py} is described.
+For this simulation, we need the following imports for Python, 
+
+\begin{lstlisting}[language=Python]
+
+from accelerator.Accelerator import Accelerator
+from accelerator.Accelerator_Info import Accelerator_Info
+from beamofparticle.Beam import Beam
+from radiofrequency.RFcavity import RFcavity
+import cProfile # Useful to monitor the time taking by each module of the code. Not mandatory.
+
+\end{lstlisting}
+
+First an Accelerator Python Object is created, as refered in Section~\ref{howto}.
+
+\begin{lstlisting}[language=Python]
+
+#--------------- Declare the Object Accelerator ------------#
+
+sis100 = Accelerator() # here my accelerator is sis100
+sis100.setRadius(172.4603) # the machine radius
+sis100.gammat = 8.9 # the transition gamma
+sis100.bdot = 0.0 # the dB/dt , here zero since no acceleration
+sis100.gammadot = 0.0 
+
+sis100.setParameterFilename('sis100') # any comment that you like for your file name in output
+sis100.dumpDistributionEveryNturn(1000) # Particle coordinates written into a file every 1000 turns 
+
+\end{lstlisting}
+
+Then a Beam Python Object is created, as refered in Section~\ref{howto}.
+
+\begin{lstlisting}[language=Python]
+
+# --------------- Declare the Object Beam ------------#
+
+beam = Beam() # I create a Beam Object beam
+beam.setGamma(5.0) # with an gamma of 5
+beam.setRestEnergy(938272046.0)
+beam.setCharge(1.0) # Protons are used
+beam.setNParticle(100000) # 100k macroparticles will be tracked
+beam.parabolicDistribution(0.509, 0.001418, 0.0) # The distribution is chosen Parabolic.
+
+\end{lstlisting}
+
+This part prints some info about the simulation you created. The momentum compaction factor is then given, computed from the Objects beam and sis100.
+
+\begin{lstlisting}[language=Python]
+
+# --------------- Get the Object Accelerator_Info ------------#
+
+info = Accelerator_Info(sis100, beam) 
+
+\end{lstlisting}
+
+Then, a Python Object RFcavity is created to simulate the RF kick given to the particles each turn.
+\begin{lstlisting}[language=Python]
+
+# --------------- Declare the Object Rfcavity ------------#
+
+rf = RFcavity(sis100) 
+rf.setHarmonic(10) # RF Harmonic
+rf.setRFvoltage(60000.0) # the voltage in Volt
+rf.setStablePhase(0.0) # the stable phase, here zero.
+sis100.addElement(rf) # Add the RF cavity to the beam line.
+
+\end{lstlisting}
+
+Finally, the tracking can start, according to two possibilities. If there an interest to monitor the speed of the code, one can use cProfile in order to see how long each module is taking to perform the computations.
+
+\begin{lstlisting}[language=Python]
+
+# --------------- Tracking ------------#
+
+cProfile.run('sis100.track(beam, 50000)','restats')
+import pstats
+p = pstats.Stats('restats')
+p.sort_stats('cumulative').print_stats(10)
+
+\end{lstlisting}
+
+Or, without time monitoring,
+
+\begin{lstlisting}[language=Python]
+# --------------- Tracking ------------#
+
+sis100.track(beam, 50000) 
+# Here start the tracking of 100k macroparticles over 50k turns
+\end{lstlisting}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=13cm]{benchmarks/pics/FinalCDFplots.pdf}\\
+  \caption{CDF .}
+\label{fig:rfsetting}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=9cm]{benchmarks/pics/StatBucketbl.pdf}\\
+  \caption{bunch length.}
+\label{fig:rfsetting}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=9cm]{benchmarks/pics/StatBucketdelta.pdf}\\
+  \caption{delta.}
+\label{fig:rfsetting}
+\end{figure}
+
+
+
+
+
+
