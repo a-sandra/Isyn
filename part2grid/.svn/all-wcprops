@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/7/Isyn/trunk/part2grid
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/7/Isyn/trunk/part2grid/setup.py
+END
+longitudinal_space_charge.ipynb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/7/Isyn/trunk/part2grid/longitudinal_space_charge.ipynb
+END
+particles2grid.pyx
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/7/Isyn/trunk/part2grid/particles2grid.pyx
+END
+particles2grid.so
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/7/Isyn/trunk/part2grid/particles2grid.so
+END
+particles2grid.c
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/7/Isyn/trunk/part2grid/particles2grid.c
+END
+compile_cython_part2grid.sh
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/7/Isyn/trunk/part2grid/compile_cython_part2grid.sh
+END
+longitudinal_space_charge-Copy0.ipynb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/7/Isyn/trunk/part2grid/longitudinal_space_charge-Copy0.ipynb
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/7/Isyn/trunk/part2grid/__init__.py
+END

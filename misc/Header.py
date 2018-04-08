@@ -1,0 +1,13 @@
+# Ready Go!
+print ' __________'
+print '< Isyn   ! >'
+print ' ----------'
+print '   \ '
+print '    \ '
+print '   /--\ '
+print '  |o_o | '
+print '  |:_/ |'
+print ' //   \ \ '
+print '(_|     |_) '
+print '/\_   _/\ '
+print '\___)=(___/ '
